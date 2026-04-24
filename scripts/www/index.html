@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="format-detection" content="telephone=no">
 <title>橙了吗</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="assets/js/xlsx.full.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -1837,26 +1837,54 @@ const ISO=d=>{const o=new Date(d);return o.getFullYear()+'-'+String(o.getMonth()
 
 /* 存储 */
 const ST={
-  g:()=>{
-    try {
-      const data=localStorage.getItem('or8');
-      return data?JSON.parse(data):null;
-    } catch (error) {
-      console.error('读取存储数据失败:', error);
-      return null;
-    }
+  _openDB:()=>{
+    return new Promise((resolve,reject)=>{
+      const request=indexedDB.open('OrangeDB',1);
+      request.onerror=()=>reject(request.error);
+      request.onsuccess=()=>resolve(request.result);
+      request.onupgradeneeded=(e)=>{
+        const db=e.target.result;
+        if(!db.objectStoreNames.contains('store')){
+          db.createObjectStore('store');
+        }
+      };
+    });
   },
-  s:d=>{
-    try {
-      localStorage.setItem('or8',JSON.stringify(d));
-    } catch (error) {
-      console.error('保存存储数据失败:', error);
+  g:async()=>{
+    try{
+      const db=await ST._openDB();
+      const tx=db.transaction('store','readonly');
+      const store=tx.objectStore('store');
+      const request=store.get('or8');
+      const result=await new Promise((resolve,reject)=>{
+        request.onsuccess=()=>resolve(request.result);
+        request.onerror=()=>reject(request.error);
+      });
+      if(result)return result;
+    }catch(e){
+      console.warn('IndexedDB读取失败，降级使用localStorage',e);
     }
+    return JSON.parse(localStorage.getItem('or8')||'null');
+  },
+  s:async(data)=>{
+    try{
+      const db=await ST._openDB();
+      const tx=db.transaction('store','readwrite');
+      const store=tx.objectStore('store');
+      store.put(data,'or8');
+    }catch(e){
+      console.warn('IndexedDB写入失败，仅使用localStorage',e);
+    }
+    localStorage.setItem('or8',JSON.stringify(data));
   }
 };
 const DEF={recs:[],phases:[],pf:{h:170,tg:65,u:'kg',fs:1,sk:'orange',chx:null,bg:null}};
-let db={...JSON.parse(JSON.stringify(DEF)),...(ST.g()||{})};
-if(!db.phases) db.phases=[];
+// 使用自执行async函数初始化db，兼容不支持顶层await的环境
+let db;
+(async()=>{
+  db={...JSON.parse(JSON.stringify(DEF)),...(await ST.g()||{})};
+  if(!db.phases)db.phases=[];
+})();
 
 /* 鸡汤 */
 const QT=[
@@ -3294,6 +3322,9 @@ function renderSkG(){
 /* 导出功能 */
 function expXLSX(){
   if(!db.recs.length)return toast('暂无数据');
+  if (typeof XLSX === 'undefined') {
+    return toast('Excel解析库未加载，请检查网络连接后重试');
+  }
   const u=db.pf.u,uf=u==='jin'?2:1;
   const data=[['日期','时间','体重('+u+')','标签','备注']];
   db.recs.sort((a,b)=>a.date.localeCompare(b.date)).forEach(r=>{
@@ -3473,6 +3504,9 @@ function parseCSV(text) {
 }
 
 function parseXLSX(arrayBuffer) {
+  if (typeof XLSX === 'undefined') {
+    throw new Error('Excel解析库未加载，请检查网络连接后重试');
+  }
   const data = new Uint8Array(arrayBuffer);
   const workbook = XLSX.read(data, { type: 'array', cellDates: true });
   for (const sheetName of workbook.SheetNames) {
@@ -3651,7 +3685,11 @@ function clrAll(){if(!confirm('确定清空所有数据？不可恢复！'))retu
 window.addEventListener('resize',()=>{if($('#vT').classList.contains('on'))drawC(getF());});
 
 /* DOMContentLoaded 后执行启动操作 */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+  // 等待db初始化完成
+  while(!db){
+    await new Promise(resolve=>setTimeout(resolve,10));
+  }
   try {
     // 应用字体大小设置
     applyFS(db.pf.fs||1);
