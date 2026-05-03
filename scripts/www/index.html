@@ -784,34 +784,94 @@ html,body{height:100%;margin:0;font-family:-apple-system,BlinkMacSystemFont,"Pin
   margin-left:auto;
 }
 
-/* ========== 振幅热力图等级 ========== */
+/* ========== 振幅热力图等级：L4-W03-P2 ========== */
+.cal-title{
+  color:var(--tx-primary) !important;
+  font-weight:700;
+}
+.cal-title .cal-title-num{
+  color:var(--accent);
+  font-weight:850;
+}
+.cal-arrow{
+  width:30px;
+  height:30px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--tx-secondary) !important;
+  background:rgba(255,255,255,.24);
+  border:1px solid rgba(255,255,255,.32);
+  box-shadow:0 6px 16px rgba(120,80,45,.08);
+  backdrop-filter:blur(14px) saturate(150%);
+  -webkit-backdrop-filter:blur(14px) saturate(150%);
+  font-size:1rem !important;
+  font-weight:760;
+  line-height:1;
+  transition:transform .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.cal-arrow:hover{
+  background:rgba(255,255,255,.38);
+}
+.cal-arrow:active{
+  transform:scale(.94);
+}
 .cal-cell.has-data.cal-flat{
-  background:rgba(180,160,145,0.12)!important;
+  background:rgba(180,160,145,0.14)!important;
 }
 .cal-cell.has-data.cal-up-1{
   background:rgba(232,106,106,0.18)!important;
 }
 .cal-cell.has-data.cal-up-2{
-  background:rgba(232,106,106,0.32)!important;
+  background:rgba(232,106,106,0.34)!important;
 }
 .cal-cell.has-data.cal-up-3{
-  background:rgba(232,106,106,0.50)!important;
+  background:rgba(232,106,106,0.54)!important;
 }
 .cal-cell.has-data.cal-down-1{
   background:rgba(92,184,133,0.18)!important;
 }
 .cal-cell.has-data.cal-down-2{
-  background:rgba(92,184,133,0.32)!important;
+  background:rgba(92,184,133,0.34)!important;
 }
 .cal-cell.has-data.cal-down-3{
-  background:rgba(92,184,133,0.50)!important;
+  background:rgba(92,184,133,0.54)!important;
 }
-.cal-cell[data-delta="up"],
-.cal-cell[data-delta="down"]{position:relative}
-.cal-cell[data-delta="up"]::after,
-.cal-cell[data-delta="down"]::after{content:'';position:absolute;inset:2px;border-radius:inherit;pointer-events:none;opacity:.18}
-.cal-cell[data-delta="up"]::after{background:repeating-linear-gradient(45deg,currentColor 0 1px,transparent 1px 4px)}
-.cal-cell[data-delta="down"]::after{background:repeating-linear-gradient(-45deg,currentColor 0 1px,transparent 1px 4px)}
+.cal-change{
+  font-weight:900 !important;
+  letter-spacing:0 !important;
+}
+.cal-change.up,
+.cal-cell[data-delta="up"] .cal-change{
+  color:#b83232 !important;
+}
+.cal-change.down,
+.cal-cell[data-delta="down"] .cal-change{
+  color:#167a48 !important;
+}
+.cal-cell[data-delta="flat"] .cal-change{
+  color:var(--tx-muted) !important;
+  font-weight:820 !important;
+}
+.mcSub{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  line-height:1.4;
+}
+.mcSub span{
+  display:inline-flex;
+  align-items:center;
+  min-height:22px;
+}
+.app.has-bg-dk .cal-arrow{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.14);
+  box-shadow:none;
+}
 
 /* ========== 月K线视图 ========== */
 .cal-view-toggle{
@@ -2529,14 +2589,24 @@ body.lowPerf *{
   width: 34px;
   height: 34px;
   flex: 0 0 34px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 12px;
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 1rem;
   box-shadow: none;
   border: 0;
+}
+
+.settings-entry-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .settings-entry-main {
@@ -2565,9 +2635,24 @@ body.lowPerf *{
 .settings-entry-arrow {
   flex: 0 0 auto;
   color: var(--tx-muted);
-  font-size: 1.05rem;
-  background: transparent;
-  border: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.22);
+}
+
+.settings-entry-arrow svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .settings-panel-overlay {
@@ -3137,6 +3222,10 @@ body.settings-panel-open #vS {
   background:transparent !important;
   color:var(--accent);
 }
+.app.has-bg-dk .settings-entry-arrow{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.12);
+}
 .fb{
   background:linear-gradient(135deg,var(--glass-l3-bg),var(--range-scroll-track,rgba(255,255,255,0.14)));
   scrollbar-color:var(--range-scroll-thumb,var(--accent)) transparent;
@@ -3523,6 +3612,41 @@ body.dev-mode .dev-only{display:flex !important;}
 .history-detail-row span:first-child{color:var(--tx-muted);}
 .history-detail-row strong{color:var(--tx-primary);}
 
+/* === L4-W05: home scroll and bottom safe area === */
+#vH{
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:calc(128px + var(--safe-bottom)) !important;
+}
+#vH .dash{
+  min-height:auto !important;
+  padding-bottom:calc(132px + var(--safe-bottom)) !important;
+}
+#vH:not(.home-empty):not(.home-today-empty) .dash{
+  justify-content:flex-start !important;
+  padding-top:18px !important;
+}
+#vH #retentionContainer,
+#vH #equivalentContainer,
+#vH #milestoneContainer{
+  margin-bottom:12px;
+}
+
+/* === L4-W05: trend range share entry === */
+.trend-share-row{
+  display:flex;
+  justify-content:flex-end;
+  padding:10px 20px 0;
+}
+.trend-share-row .ui-action{
+  min-height:36px;
+  border-radius:14px;
+  background:rgba(255,255,255,.32);
+  border:1px solid rgba(255,255,255,.36);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+}
+
 /* === U1-4: settings panel close action refinement === */
 .settings-panel-head{
   position:relative;
@@ -3660,6 +3784,157 @@ body.dev-mode .dev-only{display:flex !important;}
 #vH.home-today-empty .empty{
   padding:30px 4px;
 }
+.undo-toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(86px + var(--safe-bottom));
+  transform:translateX(-50%) translateY(18px);
+  z-index:9999;
+  min-width:min(320px,calc(100vw - 34px));
+  max-width:calc(100vw - 34px);
+  padding:10px 12px 10px 16px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  opacity:0;
+  pointer-events:none;
+  color:var(--tx-primary);
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(255,255,255,.38);
+  box-shadow:0 14px 36px rgba(120,80,45,.16);
+  backdrop-filter:blur(24px) saturate(170%);
+  -webkit-backdrop-filter:blur(24px) saturate(170%);
+  transition:opacity .22s ease, transform .22s ease;
+}
+.undo-toast.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+.undo-toast span{
+  font-size:.86rem;
+  font-weight:650;
+}
+.undo-toast button{
+  min-height:34px;
+  padding:0 14px;
+  border:0;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-light));
+  color:#fff;
+  font-size:.82rem;
+  font-weight:800;
+  box-shadow:0 8px 20px rgba(242,138,60,.22);
+}
+.app.has-bg-dk .undo-toast{
+  background:rgba(32,28,26,.86);
+  border-color:rgba(255,255,255,.14);
+  box-shadow:0 14px 36px rgba(0,0,0,.28);
+}
+.mcProgress{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+.progress-ring-wrap{
+  position:relative;
+  width:82px;
+  height:82px;
+  flex:0 0 82px;
+}
+.progress-ring-wrap svg{
+  transform:rotate(-90deg);
+}
+.progress-ring-bg{
+  fill:none;
+  stroke:var(--border-subtle);
+  stroke-width:6;
+}
+.progress-ring-fg{
+  fill:none;
+  stroke:var(--accent);
+  stroke-width:6;
+  stroke-linecap:round;
+  transition:stroke-dashoffset .45s ease;
+}
+.progress-ring-fg.streak{
+  stroke:var(--success);
+}
+.progress-ring-text{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
+}
+.progress-ring-pct{
+  font-size:.9rem;
+  font-weight:850;
+  color:var(--tx-primary);
+  line-height:1.1;
+}
+.progress-ring-label{
+  margin-top:3px;
+  font-size:.58rem;
+  font-weight:700;
+  color:var(--tx-muted);
+  line-height:1.1;
+}
+.homeMiniStats:empty,
+.homeMiniStats.is-hidden{
+  display:none !important;
+}
+.apk-check-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.apk-check-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.30);
+  border:1px solid rgba(255,255,255,.34);
+  backdrop-filter:blur(16px) saturate(150%);
+  -webkit-backdrop-filter:blur(16px) saturate(150%);
+}
+.apk-check-main{
+  min-width:0;
+}
+.apk-check-title{
+  font-size:.86rem;
+  font-weight:800;
+  color:var(--tx-primary);
+}
+.apk-check-desc{
+  margin-top:3px;
+  font-size:.72rem;
+  line-height:1.5;
+  color:var(--tx-muted);
+}
+.apk-check-status{
+  flex:0 0 auto;
+  font-size:.78rem;
+  font-weight:850;
+}
+.apk-check-ok{color:var(--success);}
+.apk-check-warn{color:var(--accent);}
+.apk-check-bad{color:var(--danger);}
+.app.has-bg-dk .apk-check-row{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.14);
+}
 </style>
 </head>
 <body>
@@ -3686,10 +3961,6 @@ body.dev-mode .dev-only{display:flex !important;}
       <div class="homeMiniItem">
         <div class="homeMiniValue" id="homeStreakValue">--</div>
         <div class="homeMiniLabel">连续记录</div>
-      </div>
-      <div class="homeMiniItem">
-        <div class="homeMiniValue" id="homeTargetValue">--</div>
-        <div class="homeMiniLabel">目标进度</div>
       </div>
     </div>
     <div id="milestoneContainer"></div>
@@ -3724,7 +3995,9 @@ body.dev-mode .dev-only{display:flex !important;}
     <div class="tSc"><div class="tSv" id="t3">--</div><div class="tSl">区间变化</div></div>
   </div>
   <div class="review-card" id="rangeReviewCard"></div>
-  <div style="text-align:right;margin:10px 20px 0"><button class="ui-action sm" onclick="showMonthReview()">本月摘要</button></div>
+  <div class="trend-share-row">
+    <button class="ui-action sm" onclick="expImg()">生成区间分享卡</button>
+  </div>
   <div class="cBox" id="cBox">
     <div class="chart-legend" id="chartLegend">
       <div class="legend-left">
@@ -3813,63 +4086,63 @@ body.dev-mode .dev-only{display:flex !important;}
     <div class="settings-list-group">
       <div class="settings-list-title">常用</div>
       <button class="settings-entry" type="button" onclick="openSettingsPanel('profile')">
-        <span class="settings-entry-icon">🎯</span>
+        <span class="settings-entry-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
         <span class="settings-entry-main">
           <span class="settings-entry-title">个人目标</span>
           <span class="settings-entry-summary" id="setSummaryProfile">身高、目标体重、单位</span>
         </span>
-        <span class="settings-entry-arrow">›</span>
+        <span class="settings-entry-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </button>
       <button class="settings-entry" type="button" onclick="openSettingsPanel('home')">
-        <span class="settings-entry-icon">🏠</span>
+        <span class="settings-entry-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
         <span class="settings-entry-main">
           <span class="settings-entry-title">首页展示</span>
           <span class="settings-entry-summary" id="setSummaryHome">模块显示与洞察入口</span>
         </span>
-        <span class="settings-entry-arrow">›</span>
+        <span class="settings-entry-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </button>
       <button class="settings-entry" type="button" onclick="openSettingsPanel('appearance')">
-        <span class="settings-entry-icon">🎨</span>
+        <span class="settings-entry-icon"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.66 0 3-1.34 3-3 .83 0 1.5-.67 1.5-1.5 0-.55-.3-1.03-.75-1.28A1.5 1.5 0 0 1 15 13.5c0-.83.67-1.5 1.5-1.5H18a4 4 0 0 0 0-8h-1.5A9 9 0 0 0 12 3z"/><circle cx="7.5" cy="10.5" r="1.5"/><circle cx="10" cy="6.5" r="1.5"/><circle cx="15" cy="6.5" r="1.5"/></svg></span>
         <span class="settings-entry-main">
           <span class="settings-entry-title">外观显示</span>
           <span class="settings-entry-summary" id="setSummaryAppearance">主题、背景、字体</span>
         </span>
-        <span class="settings-entry-arrow">›</span>
+        <span class="settings-entry-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </button>
       <button class="settings-entry" type="button" onclick="openSettingsPanel('data')">
-        <span class="settings-entry-icon">💾</span>
+        <span class="settings-entry-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/></svg></span>
         <span class="settings-entry-main">
           <span class="settings-entry-title">数据与备份</span>
           <span class="settings-entry-summary" id="setSummaryData">导入、导出、清空</span>
         </span>
-        <span class="settings-entry-arrow">›</span>
+        <span class="settings-entry-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </button>
     </div>
     <div class="settings-list-group">
       <div class="settings-list-title">更多</div>
       <button class="settings-entry" type="button" onclick="openSettingsPanel('health')">
-        <span class="settings-entry-icon">🩸</span>
+        <span class="settings-entry-icon"><svg viewBox="0 0 24 24"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0L12 5.36l-.77-.78a5.4 5.4 0 0 0-7.65 7.65L12 20.65l8.42-8.42a5.4 5.4 0 0 0 0-7.65z"/></svg></span>
         <span class="settings-entry-main">
           <span class="settings-entry-title">健康记录</span>
           <span class="settings-entry-summary" id="setSummaryHealth">经期因素与记录</span>
         </span>
-        <span class="settings-entry-arrow">›</span>
+        <span class="settings-entry-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </button>
       <button class="settings-entry" type="button" onclick="openSettingsPanel('share')">
-        <span class="settings-entry-icon">🍊</span>
+        <span class="settings-entry-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
         <span class="settings-entry-main">
-          <span class="settings-entry-title">分享与月报</span>
-          <span class="settings-entry-summary" id="setSummaryShare">分享卡片、月度摘要、Pro</span>
+          <span class="settings-entry-title">趋势分享</span>
+          <span class="settings-entry-summary" id="setSummaryShare">按趋势区间生成分享卡</span>
         </span>
-        <span class="settings-entry-arrow">›</span>
+        <span class="settings-entry-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </button>
       <button class="settings-entry" type="button" onclick="openSettingsPanel('about')">
-        <span class="settings-entry-icon">ℹ️</span>
+        <span class="settings-entry-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
         <span class="settings-entry-main">
           <span class="settings-entry-title">关于与隐私</span>
           <span class="settings-entry-summary" id="setSummaryAbout">版本、隐私、健康提示</span>
         </span>
-        <span class="settings-entry-arrow">›</span>
+        <span class="settings-entry-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </button>
     </div>
   </div>
@@ -4051,6 +4324,14 @@ body.dev-mode .dev-only{display:flex !important;}
 
             <input type="file" id="impF" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none" accept=".json,.csv,.xlsx,.xls,.et" onchange="impF(this)">
 
+            <div class="sI" onclick="runApkAcceptanceCheck()">
+              <div>
+                <div class="sL">APK 真机验收</div>
+                <div class="sI-sub">检查存储、文件、Excel、Canvas 和分享能力</div>
+              </div>
+              <div class="sR">检查 ›</div>
+            </div>
+
             <div class="sDetail demoRow" id="demoExitRow" style="display:none">
               <div class="sDetail-l">演示数据</div>
               <button class="ui-action" onclick="exitDemoMode()">清除演示</button>
@@ -4068,20 +4349,18 @@ body.dev-mode .dev-only{display:flex !important;}
 
         <section class="settings-panel-page" data-panel="share">
           <div class="settings-group">
-            <div class="sI" onclick="closeSettingsPanel();expImg()">
-              <div class="sL">生成分享卡片</div>
-              <div class="sR">生成 ›</div>
-            </div>
-
-            <div class="sI" onclick="closeSettingsPanel();showMonthReview()">
-              <div class="sL">本月趋势摘要</div>
-              <div class="sR">查看 ›</div>
+            <div class="sI" onclick="closeSettingsPanel();go('vT')">
+              <div>
+                <div class="sL">趋势分享</div>
+                <div class="sI-sub">前往趋势页，按当前区间生成分享卡</div>
+              </div>
+              <div class="sR">前往 ›</div>
             </div>
 
             <div class="sI" onclick="closeSettingsPanel();showProPage()">
               <div>
                 <div class="sL">增强功能</div>
-                <div class="sI-sub">月报、分享模板和备份能力</div>
+                <div class="sI-sub">趋势模板、高级备份和更多能力</div>
               </div>
               <div class="sR" id="proStatusText">了解 ›</div>
             </div>
@@ -4719,6 +4998,31 @@ function toast(m,undoFn,undoLabel){
     setTimeout(()=>t.classList.remove('show'),2200);
   }
 }
+function undoToast(message,undoFn,undoLabel){
+  var old=document.querySelector('.undo-toast');
+  if(old)old.remove();
+  var box=document.createElement('div');
+  box.className='undo-toast';
+  box.innerHTML='<span>'+escHTML(message||'已删除')+'</span><button type="button">'+escHTML(undoLabel||'撤销')+'</button>';
+  document.body.appendChild(box);
+  var closed=false;
+  var timer=setTimeout(close,5000);
+  function close(){
+    if(closed)return;
+    closed=true;
+    box.classList.remove('show');
+    setTimeout(function(){box.remove();},240);
+  }
+  box.querySelector('button').onclick=function(e){
+    e.stopPropagation();
+    clearTimeout(timer);
+    Promise.resolve(undoFn&&undoFn()).finally(close);
+  };
+  requestAnimationFrame(function(){
+    box.classList.add('show');
+  });
+  return close;
+}
 let lastDeletedRecord=null;
 let undoTimer=null;
 function sameRecordId(a,b){
@@ -4752,18 +5056,23 @@ async function deleteRecordWithUndo(id){
   }
   lastDeletedRecord=record;
   if(document.getElementById('hList')) renderHL(getF());
-  toast('已删除',function(){undoDeleteRecord();});
+  undoToast('已删除这条记录',function(){return undoDeleteRecord();},'撤销');
   clearTimeout(undoTimer);
   undoTimer=setTimeout(function(){lastDeletedRecord=null;},5000);
   return true;
 }
 async function undoDeleteRecord(){
-  if(!lastDeletedRecord)return;
+  if(!lastDeletedRecord){
+    toast('这条记录已无法撤回');
+    return;
+  }
   db.recs.push(lastDeletedRecord);
   db.recs.sort(function(a,b){return a.date.localeCompare(b.date);});
   lastDeletedRecord=null;
-  await commitDataChange(['home','trend'],'已恢复');
+  clearTimeout(undoTimer);
+  await commitDataChange(['home','trend'],null);
   if(document.getElementById('hList')) renderHL(getF());
+  toast('已恢复');
 }
 function needsOnboarding(){
   if(!db||!db.pf) return false;
@@ -5055,33 +5364,70 @@ try{
     bmiH='<div class="bmiTag" style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--radius-full);background:var(--glass-btn-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:0.78rem;font-weight:500;margin-top:8px"><span style="color:var(--tx-secondary)">BMI</span><span style="color:'+bmiC+';font-weight:600">'+bmi.toFixed(1)+'</span><span style="color:var(--tx-muted)">·</span><span style="color:'+bmiC+'">'+bmiL+'</span></div>';
   }
   let progressH='';
-  if(db.pf.tg>0 && db.recs.length>1){
-    const sorted=[...db.recs].sort((a,b)=>a.date.localeCompare(b.date));
-    const first=sorted[0].w;
-    const current=lt.w;
-    const target=db.pf.tg;
-    const totalDist=Math.abs(first-target);
-    const covered=Math.abs(first-current);
-    const pct=totalDist>0?Math.min(100,Math.max(0,(covered/totalDist)*100)):0;
-    const circumference=2*Math.PI*35;
-    const offset=circumference*(1-pct/100);
-    const pctLabel=pct>=100?'达成 🎉':pct.toFixed(0)+'%';
-    progressH='<div class="mcProgress"><div class="progress-ring-wrap">'
-      +'<svg viewBox="0 0 80 80" width="80" height="80">'
-      +'<circle class="progress-ring-bg" cx="40" cy="40" r="35"/>'
-      +'<circle class="progress-ring-fg" cx="40" cy="40" r="35" '
-      +'stroke-dasharray="'+circumference.toFixed(2)+'" '
-      +'stroke-dashoffset="'+offset.toFixed(2)+'"/>'
-      +'</svg>'
-      +'<div class="progress-ring-text">'
-      +'<div class="progress-ring-pct">'+pctLabel+'</div>'
-      +'<div class="progress-ring-label">目标进度</div>'
-      +'</div></div></div>';
-  }
   const mods=db.pf.modules||{bmi:1,progress:1,milestone:1,equivalent:1,bubble:1};
+
+  let stk=0,cd=new Date(now);
+  while(rs.some(r=>ISO(new Date(r.date))===ISO(cd))){
+    stk++;
+    cd.setDate(cd.getDate()-1);
+  }
+
+  if(mods.progress){
+    const circumference=2*Math.PI*35;
+    const rings=[];
+
+    if(db.pf.tg>0 && db.recs.length>1){
+      const sorted=[...db.recs].sort((a,b)=>a.date.localeCompare(b.date));
+      const first=sorted[0].w;
+      const current=lt.w;
+      const target=db.pf.tg;
+      const totalDist=Math.abs(first-target);
+      const covered=Math.abs(first-current);
+      const pct=totalDist>0?Math.min(100,Math.max(0,(covered/totalDist)*100)):0;
+      const offset=circumference*(1-pct/100);
+      const pctLabel=pct>=100?'达成':pct.toFixed(0)+'%';
+
+      rings.push(
+        '<div class="progress-ring-wrap">'
+        +'<svg viewBox="0 0 80 80" width="82" height="82">'
+        +'<circle class="progress-ring-bg" cx="40" cy="40" r="35"/>'
+        +'<circle class="progress-ring-fg" cx="40" cy="40" r="35" '
+        +'stroke-dasharray="'+circumference.toFixed(2)+'" '
+        +'stroke-dashoffset="'+offset.toFixed(2)+'"/>'
+        +'</svg>'
+        +'<div class="progress-ring-text">'
+        +'<div class="progress-ring-pct">'+pctLabel+'</div>'
+        +'<div class="progress-ring-label">目标进度</div>'
+        +'</div></div>'
+      );
+    }
+
+    if(stk>0){
+      const streakPct=Math.min(100,(stk/30)*100);
+      const streakOffset=circumference*(1-streakPct/100);
+
+      rings.push(
+        '<div class="progress-ring-wrap">'
+        +'<svg viewBox="0 0 80 80" width="82" height="82">'
+        +'<circle class="progress-ring-bg" cx="40" cy="40" r="35"/>'
+        +'<circle class="progress-ring-fg streak" cx="40" cy="40" r="35" '
+        +'stroke-dasharray="'+circumference.toFixed(2)+'" '
+        +'stroke-dashoffset="'+streakOffset.toFixed(2)+'"/>'
+        +'</svg>'
+        +'<div class="progress-ring-text">'
+        +'<div class="progress-ring-pct">'+stk+'天</div>'
+        +'<div class="progress-ring-label">连续记录</div>'
+        +'</div></div>'
+      );
+    }
+
+    if(rings.length){
+      progressH='<div class="mcProgress">'+rings.join('')+'</div>';
+    }
+  }
+
   const tagLabel=lt.tag?' · '+escHTML(lt.tag):'';
-  $('#mcIn').innerHTML='<div class="mcLb">今日体重'+tagLabel+'</div><div class="mcW" onclick="editTodayWeight()" title="点击编辑今日体重">'+dw+'<span class="mcU">'+u+'</span></div><div class="mcSub">'+dh+th+'</div>'+(mods.bmi?bmiH:'')+(mods.progress?progressH:'');
-  let stk=0,cd=new Date(now);while(rs.some(r=>ISO(new Date(r.date))===ISO(cd))){stk++;cd.setDate(cd.getDate()-1);}
+  $('#mcIn').innerHTML='<div class="mcLb">今日体重'+tagLabel+'</div><div class="mcW" onclick="editTodayWeight()" title="点击编辑今日体重">'+dw+'<span class="mcU">'+u+'</span></div><div class="mcSub"><span>'+dh+'</span><span>'+th+'</span></div>'+(mods.bmi?bmiH:'')+(mods.progress?progressH:'');
   renderHomeMiniStats(stk);
   const mc=$('#milestoneContainer');
   if(mc) mc.innerHTML=mods.milestone?renderMilestonePath():'';
@@ -5116,9 +5462,9 @@ function calcTargetProgress(){
 function renderHomeMiniStats(streak){
   const box=$('#homeMiniStats');
   if(!box)return;
-  $('#homeStreakValue').innerText=streak>0?streak+'天':'--';
-  $('#homeTargetValue').innerText=calcTargetProgress()||'未设置';
-  box.style.display='grid';
+  box.innerHTML='';
+  box.classList.add('is-hidden');
+  box.style.display='none';
 }
 function getStreakInfo(){
   const daily=getDailyLatestRecords();
@@ -5434,7 +5780,21 @@ async function saveR(){
   db.recs.sort((a,b)=>a.date.localeCompare(b.date));
   const ok3=await commitDataChange(['home','trend'],null);
   if(!ok3)return;
-  closeKb();showTodayReviewToast();maybeShowMilestoneInsight();
+
+  closeKb();
+
+  const homeView=document.getElementById('vH');
+  if(homeView){
+    homeView.classList.remove('home-empty','home-today-empty');
+  }
+
+  requestAnimationFrame(function(){
+    renderH();
+    renderT();
+  });
+
+  showTodayReviewToast();
+  maybeShowMilestoneInsight();
 }
 function showTodayReviewToast(){
   var daily=getDailyLatestRecords();
@@ -5578,6 +5938,55 @@ function rRect(ctx,x,y,w,h,r){
   ctx.lineTo(x,y+r);
   ctx.quadraticCurveTo(x,y,x+r,y);
   ctx.closePath();
+}
+function drawShareTrendChart(ctx,records,x,y,w,h){
+  var rs=(records||[]).filter(function(r){return Number.isFinite(Number(r.w));});
+  if(rs.length<2){
+    ctx.fillStyle='rgba(140,118,104,.72)';
+    ctx.font='500 24px system-ui, sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText('记录继续积累后会出现趋势线',x+w/2,y+h/2);
+    return;
+  }
+  var values=rs.map(function(r){return Number(r.w);});
+  var min=Math.min.apply(null,values);
+  var max=Math.max.apply(null,values);
+  var range=max-min||1;
+  min-=range*.12;
+  max+=range*.12;
+  function px(i){return x+(rs.length===1?0:i/(rs.length-1))*w;}
+  function py(v){return y+(1-(v-min)/(max-min))*h;}
+  ctx.save();
+  ctx.strokeStyle='rgba(242,138,60,.16)';
+  ctx.lineWidth=2;
+  for(var g=0;g<=3;g++){
+    var gy=y+h/3*g;
+    ctx.beginPath();
+    ctx.moveTo(x,gy);
+    ctx.lineTo(x+w,gy);
+    ctx.stroke();
+  }
+  ctx.strokeStyle='#f28a3c';
+  ctx.lineWidth=7;
+  ctx.lineCap='round';
+  ctx.lineJoin='round';
+  ctx.beginPath();
+  rs.forEach(function(r,i){
+    var xx=px(i),yy=py(Number(r.w));
+    if(i===0)ctx.moveTo(xx,yy);
+    else ctx.lineTo(xx,yy);
+  });
+  ctx.stroke();
+  var last=rs[rs.length-1];
+  ctx.fillStyle='#f28a3c';
+  ctx.beginPath();
+  ctx.arc(px(rs.length-1),py(Number(last.w)),10,0,Math.PI*2);
+  ctx.fill();
+  ctx.fillStyle='rgba(47,36,29,.72)';
+  ctx.font='700 22px system-ui, sans-serif';
+  ctx.textAlign='right';
+  ctx.fillText('当前区间趋势',x+w,y-18);
+  ctx.restore();
 }
 
 function sampleSeriesForCanvas(records,maxPoints){
@@ -5913,12 +6322,9 @@ function renderHL(rs){
       else if(df>.05)dH='<span class="hiDa" style="color:var(--danger)">↑'+dd+'</span>';
     }
 
-    const safeId=escHTML(r.id);
-    return '<div class="hi" data-id="'+safeId+'" style="animation-delay:'+i*0.05+'s">'
-      +'<div class="hiDel"><button class="hiDelB" type="button">删除</button></div>'
-      +'<div class="hiCfm"><button class="cfNo" type="button">取消</button><button class="cfYe" type="button">确定</button></div>'
+    return '<div class="hi" data-id="'+escHTML(r.id)+'" style="animation-delay:'+i*0.05+'s">'
       +'<div class="hiIn" title="点击查看记录时间和详情">'
-        +'<div class="hiL"><span class="hiDt">'+ds+'</span>'+(r.tag?'<span class="hiTg">'+escHTML(r.tag)+'</span>':'')+'</div>'
+        +'<div class="hiL"><span class="hiDt">'+ds+'</span></div>'
         +'<div class="hiR">'+dH+'<span class="hiW">'+ws+'</span><button class="hiQuickDel" type="button">删</button></div>'
       +'</div>'
     +'</div>';
@@ -5996,104 +6402,23 @@ function bindSw(){
   const list=document.getElementById('hList');
   if(!list)return;
 
-  if(historyDeleteBoundList!==list){
-    historyDeleteBoundList=list;
+  if(historyDeleteBoundList===list)return;
+  historyDeleteBoundList=list;
 
-    list.addEventListener('click',function(e){
-      const quick=e.target.closest('.hiQuickDel');
-      if(quick){
-        e.preventDefault();
-        e.stopPropagation();
-        const it=quick.closest('.hi');
-        if(it) confirmDeleteRecord(it.dataset.id);
-        return;
-      }
+  list.addEventListener('click',function(e){
+    const quick=e.target.closest('.hiQuickDel');
+    if(quick){
+      e.preventDefault();
+      e.stopPropagation();
+      const it=quick.closest('.hi');
+      if(it) confirmDeleteRecord(it.dataset.id);
+      return;
+    }
 
-      const delBtn=e.target.closest('.hiDelB');
-      if(delBtn){
-        e.preventDefault();
-        e.stopPropagation();
-        const it=delBtn.closest('.hi');
-        if(!it)return;
-        const del=it.querySelector('.hiDel');
-        const cfm=it.querySelector('.hiCfm');
-        if(del)del.style.display='none';
-        if(cfm)cfm.style.display='flex';
-        return;
-      }
-
-      const noBtn=e.target.closest('.cfNo');
-      if(noBtn){
-        e.preventDefault();
-        e.stopPropagation();
-        resetHistoryItem(noBtn.closest('.hi'));
-        return;
-      }
-
-      const yesBtn=e.target.closest('.cfYe');
-      if(yesBtn){
-        e.preventDefault();
-        e.stopPropagation();
-        const it=yesBtn.closest('.hi');
-        if(it) deleteRecordWithUndo(it.dataset.id);
-        return;
-      }
-
-      const row=e.target.closest('.hi');
-      if(row && row.dataset.swiping!=='1'){
-        showHistoryRecordDetail(row.dataset.id);
-      }
-    });
-  }
-
-  let openedItem=null;
-
-  list.querySelectorAll('.hi').forEach(function(it){
-    if(it.dataset.swipeBound==='1')return;
-    it.dataset.swipeBound='1';
-
-    const inn=it.querySelector('.hiIn');
-    const del=it.querySelector('.hiDel');
-    const cfm=it.querySelector('.hiCfm');
-    if(!inn||!del||!cfm)return;
-
-    let sx=0;
-    let moving=false;
-
-    it.addEventListener('touchstart',function(e){
-      if(openedItem&&openedItem!==it)resetHistoryItem(openedItem);
-      openedItem=null;
-      sx=e.touches[0].clientX;
-      moving=true;
-      it.dataset.swiping='0';
-      inn.style.transition='none';
-      cfm.style.display='none';
-      del.style.display='flex';
-    },{passive:true});
-
-    it.addEventListener('touchmove',function(e){
-      if(!moving)return;
-      const dx=e.touches[0].clientX-sx;
-      if(dx<-6){
-        e.preventDefault();
-        it.dataset.swiping='1';
-        inn.style.transform='translateX('+Math.max(dx,-70)+'px)';
-      }
-    },{passive:false});
-
-    it.addEventListener('touchend',function(e){
-      moving=false;
-      inn.style.transition='transform 0.3s cubic-bezier(0.22,1,0.36,1)';
-      const dx=e.changedTouches[0].clientX-sx;
-      if(dx<-30){
-        inn.style.transform='translateX(-70px)';
-        del.style.right='0';
-        openedItem=it;
-      }else{
-        resetHistoryItem(it);
-      }
-      setTimeout(function(){it.dataset.swiping='0';},220);
-    },{passive:true});
+    const row=e.target.closest('.hi');
+    if(row){
+      showHistoryRecordDetail(row.dataset.id);
+    }
   });
 }
 
@@ -6225,11 +6550,21 @@ function drawCrosshair(ctx, point, pL, pT, cw, ch) {
   ctx.restore();
 }
 
-function showDetailPanel(data, index){
-  if(!data || !window.chartData) return;
+function showDetailPanel(data, index, sourceRecords){
+  if(!data) return;
   selectedDataIndex = index;
-  const rs = getF();
-  const prev = index > 0 ? rs[index - 1] : null;
+
+  const rs = sourceRecords && sourceRecords.length
+    ? sourceRecords
+    : collapseToDailyLatest(getF()).sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+
+  let idx = typeof index === 'number' ? index : -1;
+
+  if(idx < 0 || !rs[idx] || rs[idx].id !== data.id){
+    idx = rs.findIndex(function(r){return r.id === data.id;});
+  }
+
+  const prev = idx > 0 ? rs[idx - 1] : null;
   const u=db.pf.u,uf=u==='jin'?2:1;
   const d=new Date(data.date);
   
@@ -6240,7 +6575,9 @@ function showDetailPanel(data, index){
   if (prev) {
     const diff = data.w - prev.w;
     const isDown = diff < 0;
-    $('#panelChange').innerHTML = `${isDown ? '↓' : '↑'} ${fmtWeight(Math.abs(diff),uf)} ${u} 较前一日`;
+    const prevDate = new Date(prev.date);
+    const prevText = (prevDate.getMonth()+1)+'/'+prevDate.getDate();
+    $('#panelChange').innerHTML = `${isDown ? '↓' : '↑'} ${fmtWeight(Math.abs(diff),uf)} ${u} 较 ${prevText}`;
     $('#panelChange').style.color = isDown ? 'var(--success)' : 'var(--danger)';
   } else {
     $('#panelChange').innerHTML = '— 无对比数据';
@@ -6431,101 +6768,117 @@ let displayYear = new Date().getFullYear();
 let displayMonth = new Date().getMonth();
 
 // 渲染日历 - 振幅热力图
+function getDailyLatestForHeatmap(){
+  return collapseToDailyLatest(db.recs)
+    .filter(function(r){return Number.isFinite(Number(r.w));})
+    .sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+}
+function getHeatmapPrevRecord(dateStr){
+  var daily=getDailyLatestForHeatmap();
+  var idx=daily.findIndex(function(r){
+    return ISO(new Date(r.date))===dateStr;
+  });
+  if(idx>0){
+    return{prev:daily[idx-1],index:idx,daily:daily};
+  }
+  return{prev:null,index:idx,daily:daily};
+}
 function renderCalendar() {
   const year = displayYear, month = displayMonth;
-  const sortedRecs = [...db.recs].sort((a, b) => new Date(a.date) - new Date(b.date));
-  
+  const dailyRecs = getDailyLatestForHeatmap();
+
   const recordMap = new Map();
-  const dateToIndex = new Map();
-  
-  sortedRecs.forEach((r, index) => {
-    const dateStr = r.date.split('T')[0];
+  const dateToDailyIndex = new Map();
+
+  dailyRecs.forEach(function(r,index){
+    const dateStr = ISO(new Date(r.date));
     recordMap.set(dateStr, r);
-    if (!dateToIndex.has(dateStr)) {
-      dateToIndex.set(dateStr, index);
-    }
+    dateToDailyIndex.set(dateStr, index);
   });
-  
-  $('#calTitle').innerText = `${year}年${month+1}月`;
-  
+
+  $('#calTitle').innerHTML = `<span class="cal-title-num">${year}</span>年<span class="cal-title-num">${month+1}</span>月`;
+
   const firstDay = new Date(year, month, 1);
   let startDayOfWeek = firstDay.getDay() || 7;
   const daysInMonth = new Date(year, month+1, 0).getDate();
-  
+
   let cells = [];
   for (let i = 1; i < startDayOfWeek; i++) cells.push(null);
-  
+
   for (let d = 1; d <= daysInMonth; d++) {
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const record = recordMap.get(dateStr);
     cells.push({ day: d, date: dateStr, record });
   }
-  
+
   let html = '';
   const u=db.pf.u;
-  cells.forEach(cell => {
+
+  cells.forEach(function(cell){
     if (!cell) {
       html += `<div class="cal-cell"></div>`;
-    } else {
-      const hasData = !!cell.record;
-      let changeHtml = '';
-      let cellClass = 'cal-cell';
-      let deltaAttr = '';
-      let ariaAttr = '';
+      return;
+    }
 
-      if (hasData) {
-        const idx = dateToIndex.get(cell.date);
-        const prevRecord = idx > 0 ? sortedRecs[idx - 1] : null;
+    const hasData = !!cell.record;
+    let changeHtml = '';
+    let cellClass = 'cal-cell';
+    let deltaAttr = '';
+    let ariaAttr = '';
 
-        if (prevRecord) {
-          const diff = cell.record.w - prevRecord.w;
-          const diffVal = fmtWeight(diff, u === 'jin' ? 2 : 1);
-          const absDiff = Math.abs(diff);
-          const isUp = diff > 0;
-          
-          if (absDiff < 0.05) {
-            changeHtml = `<span class="cal-change" style="color:var(--tx-muted);">\u00b7</span>`;
-            cellClass += ' cal-flat';
-            deltaAttr = ' data-delta="flat"';
-          } else {
-            const arrow = getDeltaMark(diff);
-            const changeClass = isUp ? 'up' : 'down';
-            changeHtml = `<span class="cal-change ${changeClass}">${arrow} ${Math.abs(diffVal)}</span>`;
-            let level;
-            if (absDiff <= 0.3) level = 1;
-            else if (absDiff <= 0.7) level = 2;
-            else level = 3;
-            cellClass += isUp ? ' cal-up-' + level : ' cal-down-' + level;
-            deltaAttr = isUp ? ' data-delta="up"' : ' data-delta="down"';
-          }
-          ariaAttr = ' aria-label="'+escHTML(getHeatmapAriaLabel(cell.date,diff,u))+'"';
-        } else {
-          changeHtml = `<span class="cal-change" style="color:var(--tx-muted);">\u00b7</span>`;
+    if (hasData) {
+      const idx = dateToDailyIndex.get(cell.date);
+      const prevRecord = idx > 0 ? dailyRecs[idx - 1] : null;
+
+      if (prevRecord) {
+        const diff = Number(cell.record.w) - Number(prevRecord.w);
+        const diffVal = formatHeatmapDelta(diff, u === 'jin' ? 2 : 1);
+        const absDiff = Math.abs(diff);
+        const level = getHeatmapLevel(absDiff);
+
+        if (level === 0) {
+          changeHtml = `<span class="cal-change">- 0</span>`;
+          cellClass += ' cal-flat';
           deltaAttr = ' data-delta="flat"';
+        } else {
+          const isUp = diff > 0;
+          const arrow = getDeltaMark(diff);
+          const changeClass = isUp ? 'up' : 'down';
+          changeHtml = `<span class="cal-change ${changeClass}">${arrow} ${diffVal}</span>`;
+          cellClass += isUp ? ' cal-up-' + level : ' cal-down-' + level;
+          deltaAttr = isUp ? ' data-delta="up"' : ' data-delta="down"';
         }
-        cellClass += ' has-data';
+
+        ariaAttr = ' aria-label="'+escHTML(getHeatmapAriaLabel(cell.date,diff,u))+'"';
+      } else {
+        changeHtml = `<span class="cal-change">- 0</span>`;
+        cellClass += ' cal-flat';
+        deltaAttr = ' data-delta="flat"';
+        ariaAttr = ' aria-label="'+escHTML(cell.date+'：第一条记录')+'"';
       }
 
-      html += `<div class="${cellClass}" data-date="${cell.date}"${deltaAttr}${ariaAttr}>
-        <span class="cal-date">${cell.day}</span>
-        ${changeHtml}
-      </div>`;
+      cellClass += ' has-data';
     }
+
+    html += `<div class="${cellClass}" data-date="${cell.date}"${deltaAttr}${ariaAttr}>
+      <span class="cal-date">${cell.day}</span>
+      ${changeHtml}
+    </div>`;
   });
-  
+
   $('#calGrid').innerHTML = html;
-  
-  $$('.cal-cell.has-data').forEach(el => {
-    el.addEventListener('click', () => {
+
+  $$('.cal-cell.has-data').forEach(function(el){
+    el.addEventListener('click', function(){
       const dateStr = el.dataset.date;
       const record = recordMap.get(dateStr);
       if (record) {
-        const index = db.recs.findIndex(r => r.id === record.id);
-        showDetailPanel(record, index);
+        const idx = dateToDailyIndex.get(dateStr);
+        showDetailPanel(record, idx, dailyRecs);
       }
     });
   });
-  
+
   if (currentCalView === 'kline') {
     renderMonthlyKLine();
   }
@@ -6726,66 +7079,54 @@ function renderMonthlyKLine() {
 /* ========== 阶梯式登山路径 ========== */
 function generateMilestones() {
   if (!db.pf.tg || db.pf.tg <= 0 || !db.recs.length) return null;
-  
+
   const sorted = [...db.recs].sort((a, b) => a.date.localeCompare(b.date));
-  const startW = sorted[0].w;
-  const currentW = sorted[sorted.length - 1].w;
-  const targetW = db.pf.tg;
-  
+  const startW = Number(sorted[0].w);
+  const currentW = Number(sorted[sorted.length - 1].w);
+  const targetW = Number(db.pf.tg);
+
+  if(!Number.isFinite(startW) || !Number.isFinite(currentW) || !Number.isFinite(targetW)) return null;
+
   const isLosing = startW > targetW;
   const totalDist = Math.abs(startW - targetW);
-  
+
   if (totalDist < 1) return null;
-  
-  let stepSize;
-  if (totalDist <= 5) stepSize = 1;
-  else if (totalDist <= 10) stepSize = 2;
-  else if (totalDist <= 20) stepSize = 3;
-  else stepSize = 5;
-  
+
+  const maxCount = 6;
+  const count = Math.min(maxCount, Math.max(2, Math.ceil(totalDist) + 1));
   const milestones = [];
-  const steps = Math.ceil(totalDist / stepSize);
-  
-  for (let i = 0; i <= steps; i++) {
-    let w;
-    if (i === steps) {
-      w = targetW;
-    } else {
-      w = isLosing ? startW - i * stepSize : startW + i * stepSize;
-    }
-    
+
+  for (let i = 0; i < count; i++) {
+    const ratio = count === 1 ? 1 : i / (count - 1);
+    const w = startW + (targetW - startW) * ratio;
     const isAchieved = isLosing ? currentW <= w + 0.05 : currentW >= w - 0.05;
-    
+
     let closestRec = null;
     let closestDist = Infinity;
-    sorted.forEach(r => {
-      const d = Math.abs(r.w - w);
-      if (d < closestDist) { closestDist = d; closestRec = r; }
+    sorted.forEach(function(r){
+      const d = Math.abs(Number(r.w) - w);
+      if (d < closestDist) {
+        closestDist = d;
+        closestRec = r;
+      }
     });
-    
+
     milestones.push({
       weight: w,
       label: w.toFixed(1),
-      isAchieved,
+      isAchieved: isAchieved,
       isCurrent: false,
       date: isAchieved && closestRec ? closestRec.date : null,
-      emoji: i === 0 ? '🏁' : (i === steps ? '🎯' : '🍊')
+      emoji: i === 0 ? '🏁' : (i === count - 1 ? '🎯' : '🍊')
     });
   }
-  
-  let hasCurrent = false;
-  for (let i = milestones.length - 1; i >= 0; i--) {
-    if (!milestones[i].isAchieved && !hasCurrent) {
-      if (i > 0 && milestones[i - 1].isAchieved) {
-        milestones[i - 1].isCurrent = true;
-        hasCurrent = true;
-      }
-    }
-  }
-  if (!hasCurrent && milestones.every(m => m.isAchieved)) {
-    milestones[milestones.length - 1].isCurrent = true;
-  }
-  
+
+  let currentIndex = milestones.findIndex(function(m){ return !m.isAchieved; });
+  if(currentIndex === -1) currentIndex = milestones.length - 1;
+  else currentIndex = Math.max(0, currentIndex - 1);
+
+  milestones[currentIndex].isCurrent = true;
+
   return milestones;
 }
 
@@ -7102,36 +7443,48 @@ function closeBubblesOnOutside(e){
 
 /* ========== 自动备份提醒 ========== */
 function checkBackupReminder() {
-  if (!db.recs || db.recs.length < 7) return;
-  if (sessionStorage.getItem('_backupReminded')) return;
+  if (!db.recs || db.recs.length < 30) return;
 
-  var last = db.pf.lastExport || 0;
-  var times = db.recs.map(function(r){ return new Date(r.date).getTime(); }).filter(Number.isFinite);
+  var now = Date.now();
+  var remindKey = 'chenglema_backup_remind_at';
+  var lastRemind = Number(localStorage.getItem(remindKey) || db.pf.lastBackupRemind || 0);
+  var lastExport = Number(db.pf.lastExport || 0);
+
+  var times = db.recs
+    .map(function(r){ return new Date(r.date).getTime(); })
+    .filter(function(t){ return Number.isFinite(t); });
+
   if(!times.length) return;
+
   var firstRecordTime = Math.min.apply(null, times);
+  var daysSinceFirst = Math.floor((now - firstRecordTime) / 86400000);
+  var daysSinceExport = lastExport ? Math.floor((now - lastExport) / 86400000) : null;
+  var daysSinceRemind = lastRemind ? Math.floor((now - lastRemind) / 86400000) : 9999;
 
-  var daysSinceFirst = Math.floor((Date.now() - firstRecordTime) / (1000 * 60 * 60 * 24));
-  var daysSinceExport = last ? Math.floor((Date.now() - last) / (1000 * 60 * 60 * 24)) : null;
+  var shouldFirstRemind = !lastExport && daysSinceFirst >= 30;
+  var shouldAgainRemind = lastExport && daysSinceExport >= 90;
 
-  var shouldRemindFirst = !last && daysSinceFirst >= 7;
-  var shouldRemindAgain = last && daysSinceExport >= 30;
+  if(daysSinceRemind < 30) return;
+  if(!shouldFirstRemind && !shouldAgainRemind) return;
 
-  if (shouldRemindFirst || shouldRemindAgain) {
-    sessionStorage.setItem('_backupReminded', '1');
-    setTimeout(function(){
-      createAppModal({
-        title: '数据备份提醒',
-        content: '<p style="text-align:center;color:var(--tx-secondary);font-size:0.9rem;line-height:1.6">你的记录已经有一段时间了，建议导出一份本地备份，换设备或误删时更安心。</p>',
-        buttons: [
-          { text: '稍后再说' },
-          { text: '去导出', className: 'primary', onClick: function(){ go('vS'); openSettingsPanel('data'); } }
-        ]
-      });
-    }, 1500);
-  }
+  db.pf.lastBackupRemind = now;
+  try{ localStorage.setItem(remindKey, String(now)); }catch(e){}
+
+  setTimeout(function(){
+    createAppModal({
+      title: '本地备份',
+      content: '<p style="text-align:center;color:var(--tx-secondary);font-size:0.9rem;line-height:1.7">记录已经积累了一段时间。可以导出一份本地备份，换设备或误删时更安心。</p>',
+      buttons: [
+        { text: '稍后' },
+        { text: '去备份', className: 'primary', onClick: function(){ go('vS'); openSettingsPanel('data'); } }
+      ]
+    });
+  }, 1500);
 }
 function markExported() {
   db.pf.lastExport = Date.now();
+  db.pf.lastBackupRemind = Date.now();
+  try{ localStorage.setItem('chenglema_backup_remind_at', String(Date.now())); }catch(e){}
   ST.s(db);
 }
 
@@ -7297,7 +7650,7 @@ function deletePhase(id) {
 
 /* ========== 商业化验证 ========== */
 const PRO_FEATURES=[
-  {key:'monthlyReport',title:'完整月报导出',tag:'Pro',desc:'更漂亮、更完整、更适合保存的月度趋势报告'},
+  {key:'monthlyReport',title:'趋势报告导出',tag:'Pro',desc:'更漂亮、更完整、更适合保存的区间趋势报告'},
   {key:'advancedShare',title:'高级分享模板',tag:'Pro',desc:'小红书/朋友圈/社群复盘不同视觉，个性化传播'},
   {key:'encryptedBackup',title:'加密备份',tag:'Pro',desc:'为长期数据增加更安全的备份方式，减少换机和误删风险'},
   {key:'snapshot',title:'多份数据快照',tag:'Pro',desc:'保存多个版本的数据状态，需要时可回滚'},
@@ -7389,7 +7742,7 @@ function getProIntroCopy(featureKey){
     monthlyDeepReport:{title:'月度深度报告',desc:'把本月趋势、波动和记录摘要整理成一张更完整的报告图。',action:'查看 Pro'},
     advancedShareTemplates:{title:'高级分享模板',desc:'生成更适合朋友圈、小红书和社群复盘的卡片。',action:'查看 Pro'},
     encryptedBackup:{title:'加密备份',desc:'导出前用密码加密，适合长期保存或换设备迁移。',action:'查看 Pro'},
-    monthlyReport:{title:'完整月报导出',desc:'把本月趋势、波动和记录摘要整理成一张更完整的报告图。',action:'查看 Pro'},
+    monthlyReport:{title:'趋势报告导出',desc:'把当前区间趋势、波动和记录摘要整理成一张更完整的报告图。',action:'查看 Pro'},
     advancedShare:{title:'高级分享模板',desc:'生成更适合不同平台的分享卡。',action:'查看 Pro'},
     snapshot:{title:'数据快照',desc:'保存多个版本的数据状态，需要时可回滚。',action:'查看 Pro'},
     coachExport:{title:'专业报告导出',desc:'导出适合专业人士参考的趋势报告。',action:'查看 Pro'},
@@ -7464,6 +7817,178 @@ function showStartupSelfCheckIfNeeded(){
     title:'启动自检提示',
     content:'<p style="text-align:center;color:var(--tx-secondary);font-size:0.9rem;line-height:1.7">'+escHTML(result.issues.join('；'))+'</p>',
     buttons:[{text:'知道了',className:'primary'}]
+  });
+}
+function getRuntimeLabel(){
+  var ua=navigator.userAgent||'';
+  var isAndroid=/Android/i.test(ua);
+  var isWebView=isAndroid && /wv|Version\/\d+\.\d+/i.test(ua);
+  var isFile=location.protocol==='file:';
+  var isStandalone=window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches;
+  if(isWebView)return 'Android WebView / APK';
+  if(isAndroid)return 'Android 浏览器';
+  if(isFile)return '本地 file 页面';
+  if(isStandalone)return 'PWA / 独立窗口';
+  return '普通浏览器';
+}
+function apkCheckResult(name,ok,desc,level){
+  return{
+    name:name,
+    ok:!!ok,
+    desc:desc||'',
+    level:level || (ok?'ok':'bad')
+  };
+}
+async function checkLocalStorageWrite(){
+  var key='chenglema_apk_check_'+Date.now();
+  localStorage.setItem(key,'1');
+  var ok=localStorage.getItem(key)==='1';
+  localStorage.removeItem(key);
+  return ok;
+}
+async function checkIndexedDBWrite(){
+  if(!window.indexedDB)return false;
+  return new Promise(function(resolve){
+    var dbName='chenglema_apk_check_'+Date.now();
+    var req=indexedDB.open(dbName,1);
+    req.onupgradeneeded=function(e){
+      e.target.result.createObjectStore('t');
+    };
+    req.onerror=function(){
+      resolve(false);
+    };
+    req.onsuccess=function(e){
+      var testDb=e.target.result;
+      try{
+        var tx=testDb.transaction('t','readwrite');
+        tx.objectStore('t').put({ok:1},'k');
+        tx.oncomplete=function(){
+          testDb.close();
+          indexedDB.deleteDatabase(dbName);
+          resolve(true);
+        };
+        tx.onerror=function(){
+          testDb.close();
+          indexedDB.deleteDatabase(dbName);
+          resolve(false);
+        };
+      }catch(err){
+        try{testDb.close();indexedDB.deleteDatabase(dbName);}catch(e){}
+        resolve(false);
+      }
+    };
+  });
+}
+async function checkXlsxMemoryRoundtrip(){
+  if(typeof XLSX==='undefined')return false;
+  var wb=XLSX.utils.book_new();
+  var ws=XLSX.utils.aoa_to_sheet([
+    ['日期','时间','体重(kg)','标签','备注'],
+    ['2026-04-01','08:00','106.7','晨起空腹','APK测试'],
+    ['2026-04-02','08:00','106.2','晨起空腹','APK测试']
+  ]);
+  XLSX.utils.book_append_sheet(wb,ws,'体重记录');
+  var buffer=XLSX.write(wb,{bookType:'xlsx',type:'array'});
+  var rows=parseXLSX(buffer);
+  return rows && rows.length >= 3;
+}
+async function checkCanvasBlob(){
+  var canvas=document.createElement('canvas');
+  canvas.width=160;
+  canvas.height=80;
+  var ctx=canvas.getContext('2d');
+  if(!ctx)return false;
+  ctx.fillStyle='#f28a3c';
+  ctx.fillRect(0,0,160,80);
+  if(canvas.toBlob){
+    var blob=await new Promise(function(resolve){
+      canvas.toBlob(resolve,'image/png');
+    });
+    return !!blob;
+  }
+  return !!canvas.toDataURL('image/png');
+}
+function checkFileInputSupport(){
+  var input=document.createElement('input');
+  input.type='file';
+  return input.type==='file' && !!window.FileReader;
+}
+function checkDownloadSupport(){
+  return !!(window.URL && URL.createObjectURL && document.createElement('a').download !== undefined);
+}
+function checkShareSupport(){
+  return !!(navigator.share);
+}
+function renderApkCheckRows(results){
+  return '<div class="apk-check-list">'+results.map(function(r){
+    var cls=r.level==='ok'?'apk-check-ok':(r.level==='warn'?'apk-check-warn':'apk-check-bad');
+    var text=r.level==='ok'?'正常':(r.level==='warn'?'可选':'异常');
+    return '<div class="apk-check-row">'
+      +'<div class="apk-check-main">'
+        +'<div class="apk-check-title">'+escHTML(r.name)+'</div>'
+        +'<div class="apk-check-desc">'+escHTML(r.desc)+'</div>'
+      +'</div>'
+      +'<div class="apk-check-status '+cls+'">'+text+'</div>'
+    +'</div>';
+  }).join('')+'</div>';
+}
+async function runApkAcceptanceCheck(){
+  toast('正在检查 APK 环境...');
+  var results=[];
+  results.push(apkCheckResult('运行环境',true,getRuntimeLabel(),'ok'));
+  try{
+    results.push(apkCheckResult('localStorage 写入',await checkLocalStorageWrite(),'用于保存轻量配置和兜底数据'));
+  }catch(e){
+    results.push(apkCheckResult('localStorage 写入',false,e.message));
+  }
+  try{
+    results.push(apkCheckResult('IndexedDB 写入',await checkIndexedDBWrite(),'用于保存主要记录数据'));
+  }catch(e){
+    results.push(apkCheckResult('IndexedDB 写入',false,e.message));
+  }
+  try{
+    results.push(apkCheckResult('Excel 解析库',typeof XLSX!=='undefined',typeof XLSX!=='undefined'?'SheetJS 已内联':'XLSX 不存在，打包文件可能不完整'));
+  }catch(e){
+    results.push(apkCheckResult('Excel 解析库',false,e.message));
+  }
+  try{
+    results.push(apkCheckResult('xlsx 内存解析',await checkXlsxMemoryRoundtrip(),'不打开文件，直接验证 APK 内 Excel 解析能力'));
+  }catch(e){
+    results.push(apkCheckResult('xlsx 内存解析',false,e.message));
+  }
+  try{
+    results.push(apkCheckResult('文件选择能力',checkFileInputSupport(),'用于导入 JSON / CSV / xlsx'));
+  }catch(e){
+    results.push(apkCheckResult('文件选择能力',false,e.message));
+  }
+  try{
+    results.push(apkCheckResult('Canvas 导出',await checkCanvasBlob(),'用于生成趋势图和分享卡片'));
+  }catch(e){
+    results.push(apkCheckResult('Canvas 导出',false,e.message));
+  }
+  try{
+    results.push(apkCheckResult('下载能力',checkDownloadSupport(),'用于导出 JSON / CSV / xlsx / 分享图',checkDownloadSupport()?'ok':'warn'));
+  }catch(e){
+    results.push(apkCheckResult('下载能力',false,e.message,'warn'));
+  }
+  try{
+    results.push(apkCheckResult('系统分享',checkShareSupport(),'Android WebView 中可能不可用，不影响保存图片',checkShareSupport()?'ok':'warn'));
+  }catch(e){
+    results.push(apkCheckResult('系统分享',false,e.message,'warn'));
+  }
+  var badCount=results.filter(function(r){return r.level==='bad'||(!r.ok&&r.level!=='warn');}).length;
+  var warnCount=results.filter(function(r){return r.level==='warn'}).length;
+  createAppModal({
+    title:'APK 真机验收',
+    content:
+      '<div style="text-align:center;margin-bottom:12px;color:var(--tx-secondary);font-size:.84rem;line-height:1.6">'
+      +'异常 '+badCount+' 项，可选能力 '+warnCount+' 项'
+      +'</div>'
+      +renderApkCheckRows(results),
+    buttons:[
+      {text:'关闭'},
+      {text:'导出 JSON 备份',className:'primary',onClick:function(){expJSON();}}
+    ]
   });
 }
 function showLocalErrorLogs(){
@@ -7584,18 +8109,8 @@ function calcMonthReview(){
   return{days:monthDays.length,first:first,last:last,min:mn,max:mx,delta:delta,range:range,abnormalDays:abnormalDays};
 }
 function showMonthReview(){
-  var data=calcMonthReview();
-  if(!data){toast('本月记录还不够生成摘要');return;}
-  var u=db.pf.u||'kg',uf=unitFactor();
-  var deltaText=fmtWeight(Math.abs(data.delta),uf),rangeText=fmtWeight(data.range,uf),trendText=getTrendText(data.delta);
-  createAppModal({
-    title:'本月趋势摘要',
-    content:'<div style="display:flex;flex-direction:column;gap:12px;text-align:center"><div class="review-text">'+trendText+'，本月首尾变化约 '+deltaText+' '+u+'。整体波动范围约 '+rangeText+' '+u+'。</div><div class="report-grid"><div class="report-metric"><div class="value">'+fmtWeight(data.min,uf)+' '+u+'</div><div class="label">本月最低</div></div><div class="report-metric"><div class="value">'+fmtWeight(data.max,uf)+' '+u+'</div><div class="label">本月最高</div></div><div class="report-metric"><div class="value">'+data.days+'</div><div class="label">记录天数</div></div><div class="report-metric"><div class="value">'+data.abnormalDays.length+'</div><div class="label">变化较大日</div></div></div><div class="review-text">较大变化通常可能和饮食、盐分、睡眠、运动、周期性因素有关，建议看长期趋势而非单日数字。</div></div>',
-    buttons:[
-      {text:'知道了',className:'primary'},
-      {text:'保存为完整报告 · Pro',onClick:function(){trackProInterest('monthlyReport');requirePro('monthlyReport');}}
-    ]
-  });
+  go('vT');
+  toast('区间摘要已在趋势页展示，可直接生成区间分享卡');
 }
 async function toggleProDev(){
   if(!db.pf.pro){
@@ -7660,37 +8175,31 @@ var SHARE_STYLE={
 };
 
 function expImg(){
-  var level=getSharePrivacyLevel();
-  var privacyHtml='<div class="share-center-section"><h3>隐私设置</h3><div class="share-privacy-radio">'
-    +'<div class="sOpt-btn'+(level==='private'?' active':'')+'" onclick="setSharePrivacyLevel(\'private\');expImg()">仅趋势</div>'
-    +'<div class="sOpt-btn'+(level==='balanced'?' active':'')+'" onclick="setSharePrivacyLevel(\'balanced\');expImg()">变化量</div>'
-    +'<div class="sOpt-btn'+(level==='open'?' active':'')+'" onclick="setSharePrivacyLevel(\'open\');expImg()">完整数值</div>'
-    +'</div><div style="font-size:0.72rem;color:var(--tx-muted);margin-top:6px">'
-    +(level==='private'?'分享图只展示趋势方向和记录天数，不显示具体体重':level==='balanced'?'分享图展示变化量，不显示当前体重':'分享图展示具体体重，生成前会再次确认')
-    +'</div></div>';
-  var trendHtml='<div class="share-center-section"><h3>趋势分享</h3>'
-    +'<button class="ui-action primary" type="button" onclick="closeModal();generateShareImage()">生成趋势卡</button>'
-    +'<button class="ui-action" type="button" style="border-top:1px solid var(--border-subtle)" onclick="closeModal();openShareComposer(\'month\')">月度复盘卡</button>'
-    +'</div>';
-  var achievementHtml='<div class="share-center-section"><h3>成就分享</h3>'
-    +'<button class="ui-action" type="button" onclick="closeModal();generateAchievementCard(\'streak\')">连续记录卡</button>'
-    +'<button class="ui-action" type="button" style="border-top:1px solid var(--border-subtle)" onclick="closeModal();generateAchievementCard(\'milestone\')">阶段目标卡</button>'
-    +'<button class="ui-action" type="button" style="border-top:1px solid var(--border-subtle)" onclick="closeModal();generateAchievementCard(\'equivalent\')">等效物卡</button>'
-    +'</div>';
-  var copyHtml='<div class="share-center-section"><h3>分享文案</h3>'
-    +'<button class="ui-action" type="button" onclick="closeModal();copyShareText(\'wechat\')">复制朋友圈文案</button>'
-    +'<button class="ui-action" type="button" style="border-top:1px solid var(--border-subtle)" onclick="closeModal();copyShareText(\'xhs\')">复制小红书文案</button>'
-    +'<button class="ui-action" type="button" style="border-top:1px solid var(--border-subtle)" onclick="closeModal();copyShareText(\'group\')">复制社群文案</button>'
-    +'</div>';
+  if(!db.recs||db.recs.length<2){
+    toast('至少需要两条记录才能生成分享卡');
+    return;
+  }
   createAppModal({
-    title:'分享中心',
-    content:'<div class="share-center">'+privacyHtml+trendHtml+achievementHtml+copyHtml+'</div>',
-    buttons:[{text:'关闭'}]
+    title:'区间分享卡',
+    content:
+      '<div class="share-center">'+
+        '<div class="share-center-section">'+
+          '<h3>'+escHTML(getCurrentRangeLabel())+'</h3>'+
+          '<div style="font-size:0.82rem;color:var(--tx-secondary);line-height:1.7">'+
+            '按当前趋势页顶部区间生成分享卡。'+
+          '</div>'+
+        '</div>'+
+      '</div>',
+    buttons:[
+      {text:'取消'},
+      {text:'生成分享卡',className:'primary',onClick:function(){generateShareImage();}}
+    ]
   });
 }
 function closeModal(){
-  var m=document.querySelector('.app-modal-overlay');
-  if(m)m.remove();
+  document.querySelectorAll('.modal-overlay,.app-modal-overlay').forEach(function(m){
+    m.remove();
+  });
 }
 function openShareComposer(type){
   if(type==='month'){showMonthReview();return;}
@@ -7718,40 +8227,76 @@ function setShareTemplate(key){
   }
 }
 
+function getCurrentRangeLabel(){
+  if(cR==='week')return '近 7 天';
+  if(cR==='month')return '近一月';
+  if(cR==='half')return '近半年';
+  if(cR==='year')return '近一年';
+  if(cR==='all')return '累计区间';
+  if(cR==='custom'){
+    var s=$('#cS')&&$('#cS').value;
+    var e=$('#cE')&&$('#cE').value;
+    if(s||e)return (s||'开始')+' 至 '+(e||'今天');
+    return '自定义区间';
+  }
+  return '当前区间';
+}
+
+function getRangeShareRecords(){
+  var raw = typeof getF === 'function' ? getF() : db.recs;
+  return collapseToDailyLatest(raw).filter(function(r){
+    return Number.isFinite(Number(r.w));
+  }).sort(function(a,b){
+    return new Date(a.date)-new Date(b.date);
+  });
+}
+
 function getShareSummary(){
-  const daily=getDailyLatestRecords?getDailyLatestRecords():[...db.recs].sort((a,b)=>a.date.localeCompare(b.date));
+  const daily=getRangeShareRecords();
   const u=db.pf.u,uf=unitFactor();
+  const rangeLabel=getCurrentRangeLabel();
+
   if(!daily.length){
     return{
       hasData:false,
       days:0,
+      recordDays:0,
       changeText:'趋势正在开始',
-      trendText:'从第一条记录开始',
-      rangeText:'暂无区间数据'
+      trendText:rangeLabel+'数据还不够',
+      rangeText:rangeLabel
     };
   }
+
   const first=daily[0];
   const last=daily[daily.length-1];
-  const diff=last.w-first.w;
+  const diff=daily.length>1 ? last.w-first.w : 0;
   const abs=Math.abs(diff);
-  const recent=daily.slice(-7);
-  const avg=recent.length?avgWeight(recent):last.w;
-  let trendText='趋势积累中';
-  if(daily.length>=7){
-    const trend=calcSevenDayTrend();
-    if(trend?.direction==='down')trendText='7 日趋势下降';
-    else if(trend?.direction==='up')trendText='7 日趋势上升';
-    else trendText='7 日趋势稳定';
+  const weights=daily.map(function(r){return Number(r.w);});
+  const mn=Math.min.apply(null,weights);
+  const mx=Math.max.apply(null,weights);
+  const range=mx-mn;
+  const recordDays=new Set(daily.map(function(r){return ISO(new Date(r.date));})).size;
+
+  let trendText='趋势正在形成';
+  if(daily.length>=2){
+    if(diff<-0.05)trendText=rangeLabel+'整体下降';
+    else if(diff>0.05)trendText=rangeLabel+'整体上升';
+    else trendText=rangeLabel+'整体稳定';
   }
+
   return{
     hasData:true,
     days:daily.length,
-    diff,
-    abs,
-    avg,
+    recordDays:recordDays,
+    diff:diff,
+    abs:abs,
+    avg:avgWeight(daily),
+    min:mn,
+    max:mx,
+    range:range,
     changeText:(diff>=0?'+':'-')+fmtWeight(abs,uf)+' '+u,
-    trendText,
-    rangeText:'已记录 '+daily.length+' 天'
+    trendText:trendText,
+    rangeText:rangeLabel+' · 记录 '+recordDays+' 天'
   };
 }
 
@@ -7824,10 +8369,15 @@ async function copyShareText(platform){
   await ST.s(db);
 }
 
+let shareGenerating=false;
 async function generateShareImage(){
+  if(shareGenerating)return;
+  shareGenerating=true;
+  closeModal();
+  toast('正在生成分享卡...');
   var templateKey=db.pf.shareTemplate||'moment';
   var ok=await beforeGenerateShare(templateKey);
-  if(!ok)return;
+  if(!ok){shareGenerating=false;return;}
   var template=SHARE_TEMPLATES[templateKey]||SHARE_TEMPLATES.moment;
   var summary=getShareSummary();
   var S=SHARE_STYLE,W=S.width,H=S.height;
@@ -7852,10 +8402,14 @@ async function generateShareImage(){
   ctx.fillText(displayData.main,W/2,430);
   ctx.fillStyle=S.muted;ctx.font='500 28px system-ui, sans-serif';
   ctx.fillText(displayData.sub,W/2,490);
-  drawRoundRect(ctx,S.padding+60,530,W-S.padding*2-120,120,28);
-  ctx.fillStyle='rgba(242,138,60,.10)';ctx.fill();
-  ctx.fillStyle=S.brand;ctx.font='700 26px system-ui, sans-serif';
-  ctx.fillText('\u4F53\u91CD\u4E0D\u662F\u6BCF\u5929\u5BA1\u5224\u81EA\u5DF1\uFF0C\u800C\u662F\u6162\u6162\u8BFB\u61C2\u8EAB\u4F53\u3002',W/2,602);
+  drawRoundRect(ctx,S.padding+20,535,W-S.padding*2-40,260,28);
+  ctx.fillStyle='rgba(255,255,255,.62)';
+  ctx.fill();
+  drawShareTrendChart(ctx,getRangeShareRecords(),S.padding+60,610,W-S.padding*2-120,120);
+  ctx.fillStyle=S.brand;
+  ctx.font='700 26px system-ui, sans-serif';
+  ctx.textAlign='center';
+  ctx.fillText('\u4F53\u91CD\u4E0D\u662F\u6BCF\u5929\u5BA1\u5224\u81EA\u5DF1\uFF0C\u800C\u662F\u6162\u6162\u8BFB\u61C2\u8EAB\u4F53\u3002',W/2,760);
   ctx.fillStyle=S.muted;ctx.font='500 24px system-ui, sans-serif';
   ctx.textAlign='center';
   ctx.fillText('\u7EAF\u672C\u5730\u8BB0\u5F55 \u00b7 \u9ED8\u8BA4\u9690\u85CF\u5177\u4F53\u4F53\u91CD \u00b7 \u53EA\u770B\u957F\u671F\u8D8B\u52BF',W/2,820);
@@ -7864,8 +8418,9 @@ async function generateShareImage(){
   ctx.fillStyle=S.muted;ctx.font='500 22px system-ui, sans-serif';
   ctx.fillText(SHARE_URL?SHARE_URL:'\u641C\u7D22\u6216\u6253\u5F00\uFF1A\u6A59\u4E86\u5417',W/2,H-100);
   var blob=await new Promise(function(resolve){c.toBlob(resolve,'image/png');});
-  if(!blob){toast('\u751F\u6210\u5931\u8D25');return;}
+  if(!blob){shareGenerating=false;toast('\u751F\u6210\u5931\u8D25');return;}
   await finishShare(blob,templateKey);
+  shareGenerating=false;
 }
 
 async function finishShare(blob,templateKey){
@@ -8170,11 +8725,29 @@ function toKg(v,unit=db.pf.u){const n=parseFloat(v);return unit==='jin'?n/2:n;}
 function fromKg(v,unit=db.pf.u){return Number(v||0)*unitFactor(unit);}
 function fmtWeight(w,uf){return (Number(w||0)*(uf??unitFactor())).toFixed(getPrecision());}
 function getDeltaMark(delta){if(!Number.isFinite(delta)||Math.abs(delta)<0.05)return '\u00b7';return delta>0?'\u2191':'\u2193';}
+function formatHeatmapDelta(diff,uf){
+  var abs=Math.abs(Number(diff));
+  var precision=getPrecision();
+  var minUnit=Math.pow(10,-precision);
+  if(!Number.isFinite(abs))return '0';
+  if(abs===0)return '0';
+  if(abs<minUnit)return '<'+minUnit.toFixed(precision);
+  return fmtWeight(abs,uf);
+}
+function getHeatmapLevel(absDiff){
+  if(!Number.isFinite(absDiff))return 0;
+  if(absDiff === 0)return 0;
+  if(absDiff < 0.2)return 1;
+  if(absDiff < 0.5)return 2;
+  return 3;
+}
 function getHeatmapAriaLabel(dateStr,delta,u){
   var base=dateStr;
-  if(!Number.isFinite(delta)||Math.abs(delta)<0.05)return base+'\uFF1A\u6301\u5E73';
-  var dir=delta>0?'\u4E0A\u6DA8':'\u4E0B\u964D';
-  return base+'\uFF1A'+dir+' '+Math.abs(delta).toFixed(1)+(u||'kg');
+  if(!Number.isFinite(delta))return base+'：暂无对比';
+  var abs=Math.abs(delta);
+  if(abs===0)return base+'：持平 0'+(u||'kg');
+  var dir=delta>0?'上升':'下降';
+  return base+'：'+dir+' '+abs.toFixed(1)+(u||'kg');
 }
 async function togglePeriodEnabled(){
   db.pf.periodEnabled = db.pf.periodEnabled ? 0 : 1;
@@ -8207,7 +8780,7 @@ const SETTINGS_PANEL_META = {
   },
   share: {
     title: '分享与 Pro',
-    desc: '生成分享卡片、查看月度摘要和 Pro 功能。'
+    desc: '区间分享、增强功能和 Pro。'
   },
   about: {
     title: '关于',
@@ -8748,21 +9321,38 @@ function parseCSV(text) {
 
 function parseXLSX(arrayBuffer) {
   if (typeof XLSX === 'undefined') {
-    throw new Error('Excel解析库未加载，请检查网络连接后重试');
+    throw new Error('Excel 解析库未加载，打包文件可能不完整');
   }
-  const data = new Uint8Array(arrayBuffer);
+
+  const sources = [arrayBuffer, new Uint8Array(arrayBuffer)];
   let lastErr;
-  for (const cellDates of [true, false]) {
-    try {
-      const workbook = XLSX.read(data, { type: 'array', cellDates });
-      for (const sheetName of workbook.SheetNames) {
-        const worksheet = workbook.Sheets[sheetName];
-        const json = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: '' });
-        if (json.length > 1) return json;
+
+  for (const source of sources) {
+    for (const cellDates of [true, false]) {
+      try {
+        const workbook = XLSX.read(source, {
+          type: source instanceof Uint8Array ? 'array' : 'array',
+          cellDates,
+          raw: false
+        });
+
+        for (const sheetName of workbook.SheetNames) {
+          const worksheet = workbook.Sheets[sheetName];
+          const json = XLSX.utils.sheet_to_json(worksheet, {
+            header: 1,
+            defval: '',
+            raw: false
+          });
+
+          if (json && json.length > 1) return json;
+        }
+      } catch(e) {
+        lastErr = e;
       }
-    } catch(e) { lastErr = e; }
+    }
   }
-  throw lastErr || new Error('未找到有效数据表');
+
+  throw lastErr || new Error('未找到有效 Excel 数据表');
 }
 
 function parseAsText(arrayBuffer) {
@@ -8792,13 +9382,27 @@ function importData(buffer, ext, fileName) {
         return { success: false, error: 'INVALID_JSON', message: 'JSON格式不正确' };
       }
     } else if (['xlsx', 'xls', 'et'].includes(ext)) {
-      try { rawData = parseXLSX(buffer); }
-      catch (xlsxErr) { rawData = parseAsText(buffer); }
+      try {
+        rawData = parseXLSX(buffer);
+      } catch (xlsxErr) {
+        return {
+          success:false,
+          error:'XLSX_PARSE_ERROR',
+          message:'Excel 文件解析失败：'+(xlsxErr.message||'请确认文件未加密、未损坏，或先另存为 xlsx/csv 后再导入')
+        };
+      }
     } else {
       const uint8Array = new Uint8Array(buffer);
       if (isXlsxBuffer(uint8Array)) {
-        try { rawData = parseXLSX(buffer); }
-        catch (xlsxErr) { rawData = parseAsText(buffer); }
+        try {
+          rawData = parseXLSX(buffer);
+        } catch (xlsxErr) {
+          return {
+            success:false,
+            error:'XLSX_PARSE_ERROR',
+            message:'Excel 文件解析失败：'+(xlsxErr.message||'请确认文件未加密、未损坏，或先另存为 xlsx/csv 后再导入')
+          };
+        }
       } else {
         rawData = parseAsText(buffer);
       }
@@ -8909,6 +9513,18 @@ function showImportPreview(records,existingCount,analysis){
   });
 }
 
+function readFileAsArrayBufferSafe(file){
+  if(file.arrayBuffer){
+    return file.arrayBuffer();
+  }
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(e){resolve(e.target.result);};
+    reader.onerror=function(){reject(new Error('文件读取失败'));};
+    reader.readAsArrayBuffer(file);
+  });
+}
+
 async function impF(inp) {
   const file = inp.files[0];
   if (!file) return;
@@ -8928,49 +9544,38 @@ async function impF(inp) {
     return;
   }
 
-  toast('正在解析文件...');
+  try {
+    toast('正在解析文件...');
+    const buffer = await readFileAsArrayBufferSafe(file);
+    const result = importData(buffer, ext, file.name);
 
-  const reader = new FileReader();
-  
-  reader.onload = async function(e) {
-    try {
-      const result = importData(e.target.result, ext, file.name);
-      
-      if (result.success) {
-        if (result.data.length === 0) {
-          toast('未找到有效数据');
+    if (result.success) {
+      if (result.data.length === 0) {
+        toast('未找到有效数据');
+        inp.value='';
+        return;
+      }
+
+      const analysis = buildImportAnalysis(result.data);
+      const confirmed = await showImportPreview(result.data, db.recs.length, analysis);
+
+      if (confirmed) {
+        if (analysis.addCount === 0) {
+          toast('没有新增记录，已跳过重复数据');
+          inp.value='';
           return;
         }
-        const analysis = buildImportAnalysis(result.data);
-        const confirmed = await showImportPreview(result.data, db.recs.length, analysis);
-        if (confirmed) {
-          if (analysis.addCount === 0) {
-            toast('没有新增记录，已跳过重复数据');
-            return;
-          }
-          toast('正在合并数据...');
-          await commitImportAnalysis(analysis);
-        }
-      } else {
-        toast(result.message || '导入失败');
+        toast('正在合并数据...');
+        await commitImportAnalysis(analysis);
       }
-    } catch (err) {
-      console.error(err);
-      toast('导入过程出错：' + err.message);
+    } else {
+      toast(result.message || '导入失败');
     }
-    
+  } catch (err) {
+    console.error(err);
+    toast('导入过程出错：' + err.message);
+  } finally {
     inp.value = '';
-  };
-  
-  reader.onerror = function() {
-    toast('文件读取失败');
-    inp.value = '';
-  };
-  
-  if (ext === 'json') {
-    reader.readAsText(file);
-  } else {
-    reader.readAsArrayBuffer(file);
   }
 }
 
